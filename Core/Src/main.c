@@ -112,7 +112,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	//MPU_Config();
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -146,7 +146,7 @@ int main(void)
   MX_QUADSPI_Init();
   MX_RTC_Init();
   MX_SAI2_Init();
-  MX_SDMMC1_MMC_Init();
+  //MX_SDMMC1_MMC_Init();
   MX_SPI2_Init();
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
@@ -158,10 +158,14 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE); // 0 = default layer
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetLayer(0);
   //BSP_LCD_Clear(0, LCD_COLOR_BLUE);
   UTIL_LCD_Clear(UTIL_LCD_COLOR_BLUE);
   //BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"Hello, STM32H750B-DK!", LEFT_MODE);
+  UTIL_LCD_SetFont(&Font8);
   UTIL_LCD_DisplayStringAt(10, 10, (uint8_t *)"Hello world!", LEFT_MODE);
   while (1)
   {
