@@ -65,8 +65,6 @@ SPI_HandleTypeDef hspi2;
 
 TIM_HandleTypeDef htim13;
 
-UART_HandleTypeDef huart3;
-
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 SDRAM_HandleTypeDef hsdram1;
@@ -85,13 +83,12 @@ static void MX_ADC3_Init(void);
 static void MX_FDCAN1_Init(void);
 static void MX_FDCAN2_Init(void);
 static void MX_FMC_Init(void);
-//static void MX_LTDC_Init(void);
+static void MX_LTDC_Init(void);
 static void MX_QUADSPI_Init(void);
 static void MX_RTC_Init(void);
 static void MX_SAI2_Init(void);
 static void MX_SDMMC1_MMC_Init(void);
 static void MX_SPI2_Init(void);
-static void MX_USART3_UART_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_DMA2D_Init(void);
 static void MX_TIM13_Init(void);
@@ -142,13 +139,12 @@ int main(void)
   MX_FDCAN1_Init();
   MX_FDCAN2_Init();
   MX_FMC_Init();
-  MX_LTDC_Init(&hltdc, 480, 272);
+  MX_LTDC_Init();
   MX_QUADSPI_Init();
   MX_RTC_Init();
   MX_SAI2_Init();
-  //MX_SDMMC1_MMC_Init();
+  MX_SDMMC1_MMC_Init();
   MX_SPI2_Init();
-  MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_DMA2D_Init();
   MX_TIM13_Init();
@@ -604,82 +600,82 @@ static void MX_FDCAN2_Init(void)
   * @param None
   * @retval None
   */
-//static void MX_LTDC_Init(void)
-//{
+static void MX_LTDC_Init(void)
+{
+
+  /* USER CODE BEGIN LTDC_Init 0 */
 //
-//  /* USER CODE BEGIN LTDC_Init 0 */
+  /* USER CODE END LTDC_Init 0 */
+
+  LTDC_LayerCfgTypeDef pLayerCfg = {0};
+  LTDC_LayerCfgTypeDef pLayerCfg1 = {0};
+
+  /* USER CODE BEGIN LTDC_Init 1 */
 //
-//  /* USER CODE END LTDC_Init 0 */
+  /* USER CODE END LTDC_Init 1 */
+  hltdc.Instance = LTDC;
+  hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
+  hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
+  hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
+  hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
+  hltdc.Init.HorizontalSync = 40;
+  hltdc.Init.VerticalSync = 9;
+  hltdc.Init.AccumulatedHBP = 53;
+  hltdc.Init.AccumulatedVBP = 11;
+  hltdc.Init.AccumulatedActiveW = 533;
+  hltdc.Init.AccumulatedActiveH = 283;
+  hltdc.Init.TotalWidth = 565;
+  hltdc.Init.TotalHeigh = 285;
+  hltdc.Init.Backcolor.Blue = 0;
+  hltdc.Init.Backcolor.Green = 0;
+  hltdc.Init.Backcolor.Red = 0;
+  if (HAL_LTDC_Init(&hltdc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  pLayerCfg.WindowX0 = 0;
+  pLayerCfg.WindowX1 = 0;
+  pLayerCfg.WindowY0 = 0;
+  pLayerCfg.WindowY1 = 0;
+  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
+  pLayerCfg.Alpha = 0;
+  pLayerCfg.Alpha0 = 0;
+  pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
+  pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
+  pLayerCfg.FBStartAdress = 0;
+  pLayerCfg.ImageWidth = 0;
+  pLayerCfg.ImageHeight = 0;
+  pLayerCfg.Backcolor.Blue = 0;
+  pLayerCfg.Backcolor.Green = 0;
+  pLayerCfg.Backcolor.Red = 0;
+  if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  pLayerCfg1.WindowX0 = 0;
+  pLayerCfg1.WindowX1 = 0;
+  pLayerCfg1.WindowY0 = 0;
+  pLayerCfg1.WindowY1 = 0;
+  pLayerCfg1.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
+  pLayerCfg1.Alpha = 0;
+  pLayerCfg1.Alpha0 = 0;
+  pLayerCfg1.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
+  pLayerCfg1.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
+  pLayerCfg1.FBStartAdress = 0;
+  pLayerCfg1.ImageWidth = 0;
+  pLayerCfg1.ImageHeight = 0;
+  pLayerCfg1.Backcolor.Blue = 0;
+  pLayerCfg1.Backcolor.Green = 0;
+  pLayerCfg1.Backcolor.Red = 0;
+  if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg1, 1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN LTDC_Init 2 */
 //
-//  LTDC_LayerCfgTypeDef pLayerCfg = {0};
-//  LTDC_LayerCfgTypeDef pLayerCfg1 = {0};
-//
-//  /* USER CODE BEGIN LTDC_Init 1 */
-//
-//  /* USER CODE END LTDC_Init 1 */
-//  hltdc.Instance = LTDC;
-//  hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
-//  hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
-//  hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
-//  hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
-//  hltdc.Init.HorizontalSync = 40;
-//  hltdc.Init.VerticalSync = 9;
-//  hltdc.Init.AccumulatedHBP = 53;
-//  hltdc.Init.AccumulatedVBP = 11;
-//  hltdc.Init.AccumulatedActiveW = 533;
-//  hltdc.Init.AccumulatedActiveH = 283;
-//  hltdc.Init.TotalWidth = 565;
-//  hltdc.Init.TotalHeigh = 285;
-//  hltdc.Init.Backcolor.Blue = 0;
-//  hltdc.Init.Backcolor.Green = 0;
-//  hltdc.Init.Backcolor.Red = 0;
-//  if (HAL_LTDC_Init(&hltdc) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
-//  pLayerCfg.WindowX0 = 0;
-//  pLayerCfg.WindowX1 = 0;
-//  pLayerCfg.WindowY0 = 0;
-//  pLayerCfg.WindowY1 = 0;
-//  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
-//  pLayerCfg.Alpha = 0;
-//  pLayerCfg.Alpha0 = 0;
-//  pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
-//  pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-//  pLayerCfg.FBStartAdress = 0;
-//  pLayerCfg.ImageWidth = 0;
-//  pLayerCfg.ImageHeight = 0;
-//  pLayerCfg.Backcolor.Blue = 0;
-//  pLayerCfg.Backcolor.Green = 0;
-//  pLayerCfg.Backcolor.Red = 0;
-//  if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
-//  pLayerCfg1.WindowX0 = 0;
-//  pLayerCfg1.WindowX1 = 0;
-//  pLayerCfg1.WindowY0 = 0;
-//  pLayerCfg1.WindowY1 = 0;
-//  pLayerCfg1.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
-//  pLayerCfg1.Alpha = 0;
-//  pLayerCfg1.Alpha0 = 0;
-//  pLayerCfg1.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
-//  pLayerCfg1.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-//  pLayerCfg1.FBStartAdress = 0;
-//  pLayerCfg1.ImageWidth = 0;
-//  pLayerCfg1.ImageHeight = 0;
-//  pLayerCfg1.Backcolor.Blue = 0;
-//  pLayerCfg1.Backcolor.Green = 0;
-//  pLayerCfg1.Backcolor.Red = 0;
-//  if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg1, 1) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
-//  /* USER CODE BEGIN LTDC_Init 2 */
-//
-//  /* USER CODE END LTDC_Init 2 */
-//
-//}
+  /* USER CODE END LTDC_Init 2 */
+
+}
 
 /**
   * @brief QUADSPI Initialization Function
@@ -926,8 +922,6 @@ static void MX_TIM13_Init(void)
 
   /* USER CODE END TIM13_Init 0 */
 
-  TIM_OC_InitTypeDef sConfigOC = {0};
-
   /* USER CODE BEGIN TIM13_Init 1 */
 
   /* USER CODE END TIM13_Init 1 */
@@ -941,70 +935,9 @@ static void MX_TIM13_Init(void)
   {
     Error_Handler();
   }
-  if (HAL_TIM_PWM_Init(&htim13) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim13, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /* USER CODE BEGIN TIM13_Init 2 */
 
   /* USER CODE END TIM13_Init 2 */
-  HAL_TIM_MspPostInit(&htim13);
-
-}
-
-/**
-  * @brief USART3 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_USART3_UART_Init(void)
-{
-
-  /* USER CODE BEGIN USART3_Init 0 */
-
-  /* USER CODE END USART3_Init 0 */
-
-  /* USER CODE BEGIN USART3_Init 1 */
-
-  /* USER CODE END USART3_Init 1 */
-  huart3.Instance = USART3;
-  huart3.Init.BaudRate = 115200;
-  huart3.Init.WordLength = UART_WORDLENGTH_8B;
-  huart3.Init.StopBits = UART_STOPBITS_1;
-  huart3.Init.Parity = UART_PARITY_NONE;
-  huart3.Init.Mode = UART_MODE_TX_RX;
-  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
-  huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-  huart3.Init.ClockPrescaler = UART_PRESCALER_DIV1;
-  huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-  if (HAL_UART_Init(&huart3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_UARTEx_SetTxFifoThreshold(&huart3, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_UARTEx_SetRxFifoThreshold(&huart3, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_UARTEx_DisableFifoMode(&huart3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN USART3_Init 2 */
-
-  /* USER CODE END USART3_Init 2 */
 
 }
 
@@ -1120,6 +1053,15 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_3, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOK, GPIO_PIN_1, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, MII_TX_ER_nINT_Pin|LCD_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
@@ -1175,6 +1117,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PE6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
   /*Configure GPIO pin : PA8 */
   GPIO_InitStruct.Pin = GPIO_PIN_8;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -1206,6 +1154,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PG3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
   /*Configure GPIO pin : LCD_INT_Pin */
   GPIO_InitStruct.Pin = LCD_INT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
@@ -1217,6 +1172,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LCD_BL_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PK1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
 
   /*Configure GPIO pins : MII_MDC_Pin MII_TXD2_Pin MII_TX_CLK_Pin MII_RXD0_Pin
                            MII_RXD1_Pin */
@@ -1249,6 +1211,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(OTG_FS2_OverCurrent_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : MII_TX_ER_nINT_Pin LCD_RST_Pin */
   GPIO_InitStruct.Pin = MII_TX_ER_nINT_Pin|LCD_RST_Pin;
